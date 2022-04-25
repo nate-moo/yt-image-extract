@@ -1,6 +1,4 @@
 flask
 httpx
 bs4
-re
-json
 gunicorn
