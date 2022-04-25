@@ -22,17 +22,14 @@ def uri():
             if "ytInitialData" in i.text:
                 ytInitialData = i.text.strip()
                 break
-        # ytInitialData = ytInitialData.replace("var ytInitialData = ", "").strip()
         print(ytInitialData[0:15])
         outside = re.compile(r"(image[\s\S]*?\])")
         main = re.compile(r"(\"url\":\"([\S]*?\"))")
-        # outsideMatched = re.match(outside, ytInitialData)
         outsideMatched = re.search(outside, ytInitialData).group(0)
         print(outsideMatched)
         mainMatched = re.search(main, outsideMatched).string
         print(mainMatched)
         loaded = json.loads("{\"" + mainMatched + "}" + "}")["image"]["thumbnails"][-1]
-        # mainMatched = re.match(main, outsideMatched)
         image = ""
         return f"<a href='{loaded['url']}'>{loaded['url']}</a>"
 
